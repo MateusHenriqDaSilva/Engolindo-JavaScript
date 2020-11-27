@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .trilha {
+        position: absolute;
+        height: 6px; width: 6px;
+        border-radius: 3px;
+        background: teal;  
+    }
+    body {
+        height: 300px;
+    }
+    </style>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    let dots = []
+    for(let i = 0; i < 12; i++) {
+        let node = document.createElement("div")
+        node.className = "trilha"
+        document.body.appendChild(node)
+        dots.push(node)
+    }
+    let correntDot = 0 
+
+    window.addEventListener("mousemove", evento => {
+        let dot = dots[correntDot]
+        dot.style.left = (evento.pageX - 3) + "px"
+        dot.style.top = (evento.pageY - 3) + "px"
+        correntDot = (correntDot + 1) % dots.length
+    })
+</script>

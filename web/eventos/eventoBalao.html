@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>🎈</p>
+</body>
+</html>
+
+<script>
+    let p = document.querySelector("p")
+    let tamanho
+    function setTamanho(novoTamanho){
+        tamanho = novoTamanho
+        p.style.fontSize = tamanho + "px"
+    }
+    setTamanho(20)
+
+    function tecladoSeta(evento){
+        if(evento.key == "ArrowUp") {
+            if(tamanho > 70) {
+                p.textContent = "💥";
+                document.body.removeEventListener("keydown", tecladoSeta)
+            } else {
+                setTamanho(tamanho * 1.1)
+                evento.preventDefault()
+            }
+        }else if(evento.key == "ArrowDown") {
+            setTamanho(tamanho * 0.9)
+            evento.preventDefault()
+        }
+    }
+    document.body.addEventListener("keydown", tecladoSeta)
+
+
+</script>

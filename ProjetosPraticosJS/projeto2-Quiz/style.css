@@ -1,0 +1,67 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background: -webkit-Linear-gradient(to left,#45031b,#05513f);
+    background: Linear-gradient(to left,#45031b,#05513f); 
+    background-color: #b8c6db;
+    font-family: "poppins", sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.campoQuiz{    
+    background-color: #fff;
+    width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 2px rgba(100,100,100,0.1);
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.quizCabecalho{
+    padding: 4rem;   
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+button {
+    background-color: #8e44ad;
+    color: white;
+    display: block;
+    width: 100%;
+    padding: 1.3rem;
+    font-family: inherit;
+    font-size: 1.3rem;
+}
+
+button:hover {
+    background-color: #732d91;
+}
+
+h2 {
+    padding: 1rem;
+    margin: 0;
+}
+
+ul li {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 1rem 0; 
+}
+
+ul li label {
+    cursor: pointer;
+}
+button:focus {
+    background-color: #666;
+    outline: none;
+}
+

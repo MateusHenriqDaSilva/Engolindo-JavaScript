@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // every
+        const usuarioRespostas = {
+            nome: "ayrton",
+            respostas: [
+                { questao_id: '001', acertou: false },
+                { questao_id: '002', acertou: false },
+                { questao_id: '003', acertou: false },
+                { questao_id: '004', acertou: false },
+                { questao_id: '005', acertou: false }
+            ]
+        }
+
+        let acertouTodas = true
+        for (let contador = 0; contador < usuarioRespostas.respostas.length; contador++) {
+            if (!usuarioRespostas.respostas[contador].acertou) {
+                acertouTodas = false
+                break
+            }
+        }
+        console.group("every")
+        console.log('Acertou todas com for', acertouTodas)
+        console.log(usuarioRespostas.respostas.every((valorRespostas) => {
+            return valorRespostas.acertou
+        }))
+        console.groupEnd()
+        //some
+        console.group("some")
+
+        console.log(usuarioRespostas.respostas.some((valorRespostas) => {
+            return valorRespostas.acertou
+        }))
+        console.groupEnd()
+
+        //flat
+        const usuarioRespostas2 = [{
+            nome: "ayrton",
+            respostas: [
+                { questao_id: '001', acertou: true },
+                { questao_id: '002', acertou: false },
+                { questao_id: '003', acertou: true },
+                { questao_id: '004', acertou: false },
+                { questao_id: '005', acertou: false }
+            ]
+        }, {
+            nome: "maria",
+            respostas: [
+                { questao_id: '001', acertou: true },
+                { questao_id: '002', acertou: false },
+                { questao_id: '003', acertou: true },
+                { questao_id: '004', acertou: false },
+                { questao_id: '005', acertou: true }
+            ]
+        }, {
+            nome: "antonia",
+            respostas: [
+                { questao_id: '001', acertou: false },
+                { questao_id: '002', acertou: false },
+                { questao_id: '003', acertou: true },
+                { questao_id: '004', acertou: false },
+                { questao_id: '005', acertou: true }
+            ]
+        },
+        ]
+
+        const todasAsRespostas = usuarioRespostas2.map(function (usuario) {
+            return usuario.respostas
+        })
+
+        console.group('flat')
+
+        console.log("todasAsRespostas:", todasAsRespostas)
+        console.log("todasAsRespostasComFlat", todasAsRespostas.flat())
+
+        const novoArrayNivel2 = [
+            [1, 4],
+            [2, 9]
+        ];
+
+        const novoArrayNivel4 = [
+            [
+                [
+                    [1, 2, 3]
+                ],
+                [
+                    [3, 2, 1]
+                ]
+            ],
+            [
+                [
+                    [1, 2, 3]
+                ],
+                [
+                    [3, 2, 1]
+                ]
+            ]
+        ]
+        console.log(novoArrayNivel2.flat(1))
+        console.log(novoArrayNivel4.flat(1))
+        console.log(novoArrayNivel4.flat(2))
+        console.log(novoArrayNivel4.flat(3))
+        console.log(novoArrayNivel4.flat(4))
+
+        console.groupEnd()
+
+        console.group("flatMap")
+
+        const todasAsRespostasComFlatMap = usuarioRespostas2.flatMap(function (usuario) {
+            return usuario.respostas
+        })
+        console.log('todasAsRespostasComFlatMap', todasAsRespostasComFlatMap)
+
+        console.groupEnd()
+
+        console.group("entries e from entries")
+
+        const usuario = {
+            nome: 'airton',
+            sobrenome: 'teshima',
+        }
+        console.log("entries primeiro exemplo", Object.entries(usuario))
+        console.log(Object.fromEntries([
+            ['cidade', 'rio grande do sul'],
+            ['signo', 'aquario']
+        ]))
+
+        const invertido = Object.entries(usuario).map((valorArray) => {
+            return [
+                valorArray[1],
+                valorArray[0]
+            ]
+        })
+
+        console.log('invertido', Object.fromEntries(invertido))
+
+        console.groupEnd()
+
+        console.group("array Normalizados")
+
+        const usuarios = [
+            {
+                id: '001',
+                nome: 'mateus henrique',
+                sexo: 'M',
+                estado: 'RJ'
+            }, {
+                id: '002',
+                nome: 'mateus henrique',
+                sexo: 'M',
+                estado: 'RJ'
+            }, {
+                id: '003',
+                nome: 'mateus henrique',
+                sexo: 'M',
+                estado: 'RJ'
+            }, {
+                id: '004',
+                nome: 'mateus henrique',
+                sexo: 'M',
+                estado: 'RJ'
+            }, {
+                id: '005',
+                nome: 'mateus henrique',
+                sexo: 'M',
+                estado: 'RJ'
+            }, {
+                id: '006',
+                nome: 'mateus henrique',
+                sexo: 'F',
+                estado: 'SP'
+            }, {
+                id: '007',
+                nome: 'mateus henrique',
+                sexo: 'F',
+                estado: 'SP'
+            }, {
+                id: '008',
+                nome: 'mateus henrique',
+                sexo: 'F',
+                estado: 'SP'
+            }, {
+                id: '009',
+                nome: 'mateus henrique',
+                sexo: 'F',
+                estado: 'SP'
+            }, {
+                id: '010',
+                nome: 'mateus henrique',
+                sexo: 'F',
+                estado: 'SP'
+            }
+        ]
+
+        const usuariosNormalizados = usuarios.reduce((acumulador, usuario) => {
+            acumulador[usuario.id] = usuario
+            return acumulador
+        }, {})
+
+        const usuariosNormalizadosComFromEntries = Object.fromEntries(
+            usuarios.map((usuarioObjeto) => {
+                return [
+                    usuarioObjeto.id,
+                    usuarioObjeto
+                ]
+            })
+        )
+
+        console.log('usuariosNormalizadosComEntries', usuariosNormalizadosComFromEntries)
+
+        console.log('todasAsRespostasComFlatMap', todasAsRespostasComFlatMap)
+        const questoesAgrupadas = Object.fromEntries(todasAsRespostasComFlatMap.map((resp) => {
+            return [
+                resp.questao_id, 0
+            ]
+        }))
+
+        console.log('respostas certas questoes',Object.fromEntries(Object.entries(questoesAgrupadas)
+        .map((questao) => {
+            return [
+                questao[0],
+                todasAsRespostasComFlatMap.filter((respostas) => {
+                    return respostas.questao_id === questao[0] && respostas.acertou
+                }).length
+            ]
+        })))
+
+
+        console.groupEnd()
+
+        console.group('padStart and padEnd')
+
+
+
+        const numeroCartao = '123456789'
+        const ultimos4digitos = numeroCartao.slice(-4)
+        console.log('cartao: ', ultimos4digitos.padStart(16, '*'))
+        console.groupEnd()
+    </script>
+</body>
+
+</html>

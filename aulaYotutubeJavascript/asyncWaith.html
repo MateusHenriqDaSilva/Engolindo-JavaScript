@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // request.get('http://site.com',  
+        //     .then()
+        //     .then()
+        // )
+        //async awaith
+
+        //promessa then
+        function getPosts() {
+            fetch('https://jsonplaceholder.typicode.com/posts')
+                .then((d) => {
+                    return d.json()
+                })
+                .then(console.log)
+        }
+        getPosts()
+        console.log("------- outro lado ------ ")
+        async function getPosts() {
+            const resultado = await fetch('https://jsonplaceholder.typicode.com/posts')
+            return resultado.json()
+        }
+
+        getPosts().then(console.log)
+        // (async function(){
+        //     const posts = await getPosts()
+        //     console.log(posts)
+        // }())
+
+        async function getNumero() {
+            return await 2
+        }
+
+        //getNumero().then(console.log)
+
+        async function getUsers() {
+            const resultado2 = await fetch('https://jsonplaceholder.typicode.com/users')
+            return resultado2.json()
+        }
+
+        async function getUsersPosts(userId) {
+            const posts = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
+            return posts.json()
+        }
+
+        (async function () {
+            const users = await getUsers()
+            const posts1 = []
+
+            for (let i = 0; i < users.length; i++) {
+                posts1.push(getUsersPosts(users[i].id))
+            }
+
+            const allPosts = await Promise.all(posts1)
+            console.log(allPosts)
+
+            Promise.all(posts1).then(console.log)
+
+            const resultado = await Promise.all(users.map(conteudo => getUsersPosts(conteudo.id)))
+            console.log(resultado)
+        }())
+
+        fetch(`https://jsonplaceholder.typicode.com/users`)
+            .then(d => d.json())
+            .then(console.log)
+
+            // (async function () {
+                // try {
+                //     fetch(`https://jsonplaceholder.typicode.com/users`)
+                //         .then(function (d) {
+                //             return JSON.parse(d)
+                //         }).catch(function (e) {
+                //             console.log("erro na promisse", e)
+                //         })
+
+            //     const users = await fetch(`https://placeholder.typicode.com/users`)
+            //         const data = JSON.parse(users)
+            //         console.log(users)
+            //     } catch (e) {
+            //         console.log("erro aqui no catch")
+            //     }
+            // }())
+    </script>
+</body>
+
+</html>

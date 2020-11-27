@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/1.1.1/marked.min.js"></script> 
+    <style>
+        * {
+            box-sizing: border-box; 
+        } 
+        body {
+            background-color: #7bdaf3;
+            display: flex;
+            flex-wrap: wrap;
+            font-family: "poppins", "sans-serif";
+            margin: 0;
+        }
+        .notas {
+            background-color: #fff;
+            margin: 20px;
+            height: 400px;
+            width: 400px;
+        }
+        .notas .quadrado {
+            background-color: #9ec862;
+            display: flex;
+            justify-content: flex-end;
+            padding: 0.5rem
+        }
+
+        .notas .quadrado button {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1rem;
+            margin-left: 0.5rem;
+        }
+        .notas .corpoPrincipal {
+            display: none;
+            height: 100%;
+            width: 100%;
+        }
+
+        .notas textarea {
+            font-family: inherit;
+            border: none;
+            height: 100%;
+            width: 100%;
+            outline: none;
+        }
+
+        .notas .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="notas">
+        <div class="quadrado">
+            <button class="edit"><i class="fas fa-edit"></i></button>
+            <button class="delete"><i class="fas fa-trash-alt"></i></button>
+        </div>
+        <div class="corpoPrincipal hidden"></div>
+        <textArea></textArea>
+    </div>
+</body>
+<script>
+    const campoNotas = document.querySelector(".notas")
+    const campoEditBtn = document.querySelector('.edit')
+    const campoDeleteBtn = document.querySelector('.delete')
+    const campoCorpoPrincipal = campoNotas.querySelectorAll('.corpoPrincipal')
+    const campoTextarea = campoNotas.querySelectorAll('.textArea')
+
+    campoEditBtn.addEventListener('click', () => {
+        campoCorpoPrincipal.classList.toggle('hidden')
+        campoTextarea.classList.toggle('hidden')
+    })
+</script>
+</html>

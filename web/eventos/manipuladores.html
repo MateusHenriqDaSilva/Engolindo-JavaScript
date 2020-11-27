@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 200px;
+            background: beige;
+        }
+        .dot{
+            height: 8px; width: 8px;
+            border-radius: 4px;
+            background: blue;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <p> clique para ativar os eventos</p>
+    <button id="botao1">clique me</button>
+    <button id="botao2">acao</button>
+    <button id="a">A</button>
+    <button id="b">B</button>
+    <button id="c">C</button>
+    <a href="https://developer.mozilla.org/">MDN</a>
+    <p>aperte control-space para continuar</p>
+    <p>drag o barra que troca a largura</p>
+    <div style="background: orange; width: 60pxç; height:20px;"></div>
+</body>
+
+</html>
+<script>
+    window.addEventListener("click", () => {
+        console.log("voce bateu")
+    })
+
+    let button1 = document.getElementById("botao1")
+    button1.addEventListener("click", () => {
+        console.log("botao clicado")
+    })
+
+    let button2 = document.getElementById("botao2")
+    function once() {
+        console.log("done.")
+        button2.removeEventListener("click", once)
+    }
+    button2.addEventListener("click", once)
+
+    document.body.addEventListener("click", event => {
+        if(event.target.nodeName == "BUTTON") {
+            console.log("clicado", event.target.textContent)
+        }
+    })
+    let link = document.querySelector("a")
+    link.addEventListener("click", event => {
+        console.log("clicado especial")
+        event.preventDefault()
+    })
+    window.addEventListener("keydown", event => {
+        if(event.key == "v") {
+            document.body.style.background = "violet"
+        }
+    })
+    window.addEventListener("keyup", event => {
+        if (event.key == "v") {
+            document.body.style.background = "";
+        }
+    })
+    window.addEventListener("keydown", event => {
+        if (event.key == " " && event.ctrlKey) {
+            console.log("continua")
+        }
+    })
+    window.addEventListener("click", event => {
+        let dot = document.createElement("div")
+        dot.className = "dot"
+        dot.style.left = (event.pageX - 4) + "px"
+        dot.style.top = (event.pageY - 4) + "px"
+        document.body.appendChild(dot)
+    })
+    let lastX;
+    let bar = document.querySelector("div")
+    bar.addEventListener("mousedown", event => {
+        if(event.button == 0){ 
+            window.addEventListener("mousemove", moved)
+            event.preventDefault()
+        }
+    })
+    function moved(event){  
+        if( event.buttons == 0 ) {
+            window.removeEventListener("mousemove", moved)
+        } else {
+            let dist = event.clientX - lastX
+            let newWidth = Math.max(10, bar.offsetWidth + dist)
+            bar.style.width = newWidth + "px"
+            lastX = event.clientX
+        }
+    }
+
+    
+</script>
